@@ -7,8 +7,11 @@ services:
         build:
             context: ./api
             dockerfile: Dockerfile
+        depends_on:
+            - tg_bot
         ports:
           - 5000:5000
+        restart: always
 
     tg_bot:
         image: tg_bot
@@ -18,3 +21,4 @@ services:
             dockerfile: Dockerfile
         env_file:
             - ./bot/.env
+        restart: always
