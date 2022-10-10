@@ -40,7 +40,12 @@ API создана при помощи Flask и имеет один endpoint `/p
 Проект описан двумя сервисами: `api` и `bot`, каждый из них запускается отдельно в докере, а вся система целиком поднимается через `docker-compose`:
 
 ```
-docker-compose up
+> docker-compose up
+
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+e3799fe52a16   api       "sh -c 'python3 __ma…"   7 minutes ago   Up 7 minutes   0.0.0.0:5000->5000/tcp, :::5000->5000/tcp   hackitmo_api_1
+c3717b7a1257   tg_bot    "sh -c 'python3 __ma…"   7 minutes ago   Up 7 minutes                                               hackitmo_tg_bot_1
+
 ```
 
 <h2>Общая архитектура</h2>
