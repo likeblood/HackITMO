@@ -19,4 +19,4 @@ services:
             context: ./bot
             dockerfile: Dockerfile
         env_file:
-            - ./tg_bot/.env
+            - ./bot/.env
