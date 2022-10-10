@@ -3,11 +3,9 @@ import requests
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
-# from aiogram.dispatcher.filters.state import StatesGroup
 
 from bot.config import tg_bot_token, open_toxic_token
 
-#bot = telebot.TeleBot('5663598777:AAFFwbcgJ4mrIVALO940WfGingesF_BcqNs')
 
 bot = Bot(token=tg_bot_token)
 dp = Dispatcher(bot)
