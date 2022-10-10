@@ -1,7 +1,7 @@
 import flask
 from flask import Flask, request
 
-from api.prepare_data import main_predict
+from prepare_data import main_predict
 
 app = Flask(__name__)
 

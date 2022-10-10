@@ -7,8 +7,6 @@ services:
         build:
             context: ./api
             dockerfile: Dockerfile
-        environment:
-          PYTHONPATH: "/app/"
         ports:
           - 5000:5000
 

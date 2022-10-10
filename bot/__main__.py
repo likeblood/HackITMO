@@ -4,7 +4,7 @@ from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 
-from bot.config import tg_bot_token, open_toxic_token
+from config import tg_bot_token, open_toxic_token
 
 
 bot = Bot(token=tg_bot_token)
