@@ -2,15 +2,20 @@
 
 
 <h2>Модель</h2>
-Данные: https://www.kaggle.com/datasets/blackmoon/russian-language-toxic-comments.
+
+Данные:
+- https://www.kaggle.com/datasets/blackmoon/russian-language-toxic-comments.
+- https://www.kaggle.com/datasets/nigula/russianinappropriatemessages?select=train.csv
 
 В данных есть перекос классов в связи с чем взята метрика `F1`.
 
 Процесс обучения:
 1. Предобработка текста (удаление лишних символов, стоп-слов, приведение к нормальной форме - pymorphy2)
-2. Обучение с CatBoost (2500 эпох на GPU). `F1 = 84%`
+2. ООбучение с CatBoost(2500 эпох на GPU). `F1 = 84%` - для первого набора данных, `F1 = 74%` - для второго набора данных
 
-После скачивания репы нужно в ней же создать директорию `data` - там должны быть размещены данные для обучения.
+После скачивания репы нужно в ней же создать директории `data/russian_toxic` (для первого набора данных) и `data/russian_inappropriate_messages` - там должны быть размещены данные для обучения.
+
+Модели: https://drive.google.com/drive/folders/16Z9H9NdqI1e-4j2clbs5U5jjyrBWQMOM?usp=sharing 
 
 <h2>API</h2>
 API создана при помощи Flask и имеет один endpoint `/predict`
