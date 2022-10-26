@@ -29,7 +29,7 @@ def create_model():
     return model
 
 def predict_X(X):
-    path_model = "../api/"
+    path_model = "../api/models/"
     file_model = "hack_model_russian"
     model = create_model()
     model.load_model(os.path.join(path_model, file_model))
@@ -56,7 +56,7 @@ def en_to_run(string):
     return string.lower().strip()
 
 def clear_text(string):
-    new_string = re.sub('[^а-яА-Я]', '', string)
+    new_string = re.sub('[^а-яА-Я]', ' ', string)
     return re.sub('\s+',' ', new_string)
 
 # приведение токенов входящих в текст к нормальной форме
@@ -73,6 +73,7 @@ def norm(text):
 
 def text_clear(text):
     text = clear_text(en_to_run(text))
+    print('text:', text)
     text = norm(text)
     return text
 
