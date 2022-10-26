@@ -8,6 +8,7 @@
 # который получается в ходе преобразования столбцов к строковой форме
 
 import os
+import re
 
 import nltk
 import pymorphy2
@@ -38,27 +39,25 @@ def predict_X(X):
     print("y_pred ", y_pred, ". y_proba ", y_proba)
     return [y_pred, y_proba]
 
-def lemmatized(text):
-    # нормализация текста: приведение к нижнему регистру, удаление различных символов
-    text = text.lower()
-    text = text.replace(',', ' ')
-    text = text.replace('.', ' ')
-    text = text.replace('-', ' ')
-    text = text.replace(';', ' ')
-    text = text.replace(':', ' ')
-    text = text.replace('(', ' ')
-    text = text.replace(')', ' ')
-    text = text.replace('}', ' ')
-    text = text.replace('{', ' ')
-    text = text.replace('<', ' ')
-    text = text.replace('>', ' ')
+def en_to_run(string):
+    en_ru = {'A': 'А', 'a': 'а', 'B': 'Б', 'b': 'б', 'V': 'В', 'v': 'в',
+    'G': 'Г', 'g': 'г', 'D': 'Д', 'd': 'д', 'E': 'Э', 'e': 'э', 'Yo': 'Ё', 'yo': 'ё',
+    'Zh': 'Ж', 'zh': 'ж', 'Z': 'З', 'z': 'з', 'I': 'И', 'i': 'и', 'Y': 'Й', 'y': 'й',
+    'K': 'К', 'k': 'к', 'L': 'Л', 'l': 'л', 'M': 'М', 'm': 'м', 'N': 'Н', 'n': 'н',
+    'O': 'О', 'o': 'о', 'P': 'П', 'p': 'п', 'R': 'Р', 'r': 'р', 'S': 'С', 's': 'с',
+    'T': 'Т', 't': 'т', 'U': 'У', 'u': 'у', 'F': 'Ф', 'f': 'ф', 'H': 'Х', 'h': 'х',
+    'Ts': 'Ц', 'ts': 'ц', 'Ch': 'Ч', 'ch': 'ч', 'Sh': 'Ш', 'sh': 'ш', 'Sch': 'Щ', 'sch': 'щ',
+    'Yi': 'Ы', 'yi': 'ы', 'Yu': 'Ю', 'yu': 'ю', 'Ya': 'Я', 'ya': 'я'}
 
-    text = text.replace('!', ' ')
-    text = text.replace(r'\d+', ' ')
-    text = text.replace(r'[\W]+', ' ')
+    for k, v in en_ru.items():
+        if k in string:
+            string = string.replace(k, v)
+    
+    return string.lower().strip()
 
-    return text
-
+def clear_text(string):
+    new_string = re.sub('[^а-яА-Я]', '', string)
+    return re.sub('\s+',' ', new_string)
 
 # приведение токенов входящих в текст к нормальной форме
 def norm(text):
@@ -73,7 +72,7 @@ def norm(text):
     return text_norm
 
 def text_clear(text):
-    text = lemmatized(text)
+    text = clear_text(en_to_run(text))
     text = norm(text)
     return text
 
