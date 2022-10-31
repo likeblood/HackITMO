@@ -145,3 +145,4 @@ portfolio/keys
 portfolio/env.py
 
 docker-compose.override.yml
+*.db

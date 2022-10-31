@@ -19,6 +19,8 @@ services:
         build:
             context: ./bot
             dockerfile: Dockerfile
+        environment:
+            PYTHONPATH: "/app/"
         env_file:
             - ./bot/.env
         restart: always
