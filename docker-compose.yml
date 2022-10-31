@@ -20,7 +20,7 @@ services:
             context: ./bot
             dockerfile: Dockerfile
         environment:
-            PYTHONPATH: "/bot/"
+            PYTHONPATH: "/"
         env_file:
             - ./bot/.env
         restart: always
