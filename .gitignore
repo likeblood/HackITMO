@@ -1,9 +1,9 @@
 # Byte-compiled / optimized / DLL files
-# __pycache__/
-# *.py[cod]
-# *$py.class
-# *.pyc
-# *.db
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.db
 
 # ide
 .idea
@@ -145,5 +145,3 @@ portfolio/keys
 portfolio/env.py
 
 docker-compose.override.yml
-*.pyc
-*.pyc
