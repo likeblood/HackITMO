@@ -1,8 +1,7 @@
 import sqlite3 as sq
 #from bot.__main__ import bot, counter
-#from bot.admin import ID
-from bot.create_bot import bot, counter
 #from bot.handlers.admin import ID
+from bot.create_bot import bot, dp, counter
 
 def sql_start():
     global base, cur
@@ -19,6 +18,7 @@ async def sql_add_command(state):
         base.commit()
 
 async def sql_read(message):
-   # if message.from_user.id == ID:
-        for ret in cur.execute('SELECT * FROM info').fetchall():
-            await bot.send_message(message.from_user_id, f'Запрещенные слова: {ret[0]}\n Количество удаленных сообщений: {counter}')
+    #if message.from_user.id == ID:
+    for ret in cur.execute('SELECT * FROM info').fetchall():
+        await bot.send_message(message.from_user.id, f'Запрещенные слова: {ret[0]}\nКоличество удаленных сообщений: {counter}')
+

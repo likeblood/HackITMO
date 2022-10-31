@@ -1,5 +1,4 @@
-from aiogram.dispatcher import FSMContext
-from aiogram.dispatcher.filters.state import State, StatesGroup
+
 from aiogram.dispatcher.filters import Text
 from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
@@ -11,6 +10,11 @@ from bot.data_base import sqlite_db
 
 
 ID = None
+
+# @dp.message_handler(commands='info')
+async def load_info(message: types.Message):
+    if message.from_user.id == ID:
+        await sqlite_db.sql_read(message)
 
 class FSMAdmin(StatesGroup):
     toxic_words = State()
@@ -50,15 +54,10 @@ async def cancel_handler(message: types.Message, state: FSMContext):
         await state.finish()
         await message.reply('ОК')
 
-# @dp.message_handler(commands='info')
-async def load_info(message: types.Message):
-    if message.from_user.id == ID:
-        await sqlite_db.sql_read(message)
-
 def register_handlers_admin(dp: Dispatcher):
   dp.register_message_handler(load_info, commands=['info'])
   dp.register_message_handler(make_changes_command, commands=['moderator'], is_chat_admin=True)
   dp.register_message_handler(cm_start, commands=['add'], state=None)
   dp.register_message_handler(load_word, state=FSMAdmin.toxic_words)
-  dp.register_message_handler(cancel_handler, state="*", commands='Cancel')
-  dp.register_message_handler(cancel_handler, Text(equals='Cancel', ignore_case=True), state="*")
+  dp.register_message_handler(cancel_handler, state="*", commands=['Cancel'])
+  dp.register_message_handler(cancel_handler, Text(equals=['Cancel'], ignore_case=True), state="*")
