@@ -1,2 +1,2 @@
-from handlers import admin
-from handlers import chat
+from bot.handlers import admin
+from bot.handlers import chat

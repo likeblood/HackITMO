@@ -3,10 +3,10 @@ import re
 import requests
 from aiogram import types, Dispatcher
 
-from ..config import open_toxic_token
-from ..misc.throttling import rate_limit
-from ..config import open_toxic_token
-from ..data_base.sqlite_db import sql_read_stop_words
+from bot.config import open_toxic_token
+from bot.misc.throttling import rate_limit
+from bot.config import open_toxic_token
+from bot.data_base.sqlite_db import sql_read_stop_words
 
 
 def clear_text(string):

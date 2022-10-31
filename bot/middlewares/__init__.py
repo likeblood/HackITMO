@@ -1,1 +1,1 @@
-from middlewares import throttling
+from bot.middlewares import throttling

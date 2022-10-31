@@ -2,7 +2,8 @@ from aiogram import Bot
 from aiogram.dispatcher import Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
-from  config import tg_token_bot
+from bot.config import tg_token_bot
+
 
 storage = MemoryStorage()
 
