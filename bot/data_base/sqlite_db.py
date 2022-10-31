@@ -1,6 +1,4 @@
 import sqlite3 as sq
-#from bot.__main__ import bot, counter
-#from bot.handlers.admin import ID
 from bot.create_bot import bot, dp, counter
 
 def sql_start():
@@ -22,3 +20,8 @@ async def sql_read(message):
     for ret in cur.execute('SELECT * FROM info').fetchall():
         await bot.send_message(message.from_user.id, f'Запрещенные слова: {ret[0]}\nКоличество удаленных сообщений: {counter}')
 
+def sql_read_stop_words():
+    sw = set()
+    for ret in cur.execute('SELECT * FROM info').fetchall():
+        sw.add(ret[0])
+    return sw

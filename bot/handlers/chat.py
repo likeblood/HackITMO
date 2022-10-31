@@ -1,20 +1,30 @@
 
+import re
 import requests
-import bot.middlewares
-
 from aiogram import types, Dispatcher
-from bot.config import open_toxic_token
-from bot.create_bot import dp, counter
-from bot.misc.throttling import rate_limit
 
-import json
+import bot.middlewares
 from bot.config import open_toxic_token
+from bot.misc.throttling import rate_limit
+from bot.config import open_toxic_token
+from bot.data_base.sqlite_db import sql_read_stop_words
+
+
+def clear_text(string):
+    new_string = re.sub('[^а-яА-Я]', ' ', string)
+    return re.sub('\s+',' ', new_string)
 
 
 @rate_limit(limit=10, key=["text"])
 # @dp.message_handler(content_types=["text"])
 async def on_message(message: types.Message):
     try:
+        sw = sql_read_stop_words()
+        for word in clear_text(message.text).split():
+            if word in sw:
+                await message.delete()
+                bot.create_bot.counter += 1
+
         print(message.text)
         r = requests.post(
             f"{open_toxic_token}/predict",
@@ -28,7 +38,7 @@ async def on_message(message: types.Message):
         toxic = data["body"]["answer"]
 
         if toxic == 'toxic' and data["body"]["probability"] > 0.51:
-            await message.reply(f"Токсичное сообщение пользователя @{message['from']['username']}: {message.text}\n")
+            # await message.reply(f"Токсичное сообщение пользователя @{message['from']['username']}: {message.text}\n")
             await message.delete()
             bot.create_bot.counter += 1
 
