@@ -1,5 +1,5 @@
 import os
 
 
-open_toxic_token = os.getenv("API_URL")
-tg_bot_token = os.getenv("BOT_TOKEN")
+tg_token_bot = os.getenv('BOT_TOKEN')
+open_toxic_token = os.getenv('API_URL')

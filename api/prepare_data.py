@@ -73,7 +73,6 @@ def norm(text):
 
 def text_clear(text):
     text = clear_text(en_to_run(text))
-    print('text:', text)
     text = norm(text)
     return text
 

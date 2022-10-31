@@ -1,46 +1,15 @@
-import requests
-
-from aiogram import Bot, types
-from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
+from create_bot import dp
 
-from config import tg_bot_token, open_toxic_token
-
-
-bot = Bot(token=tg_bot_token)
-dp = Dispatcher(bot)
+from bot.handlers import chat, admin
+from bot.data_base import sqlite_db
 
 
-@dp.message_handler(commands=['start'])
-async def start(message):
-    await message.reply("Привет, пришли сообщение на проверку")
+async def on_startup(_):
+    print('Bot is online!')
+    sqlite_db.sql_start()
 
+admin.register_handlers_admin(dp)
+chat.register_handlers_chat(dp)
 
-
-@dp.message_handler(content_types=["text"])
-async def on_message(message: types.Message):
-    try:
-        print(message.text)
-        r = requests.post(
-            f"{open_toxic_token}/predict",
-            json={
-                "event_type": "toxic_or_not",
-                "comment": message.text,
-            }
-        )
-        data = r.json()
-        print(data)
-        toxic = data["body"]["answer"]
-
-        if toxic == 'toxic' and data["body"]["probability"] > 0.51:
-            # await message.reply(f"Токсичное сообщение пользователя @{message['from']['username']}: {message.text}\n")
-            await message.delete()
-
-    except Exception as e:
-        await message.reply(f"Ошибка: {e}")
-
-
-
-if __name__ == '__main__':
-    # dp.register_message_handler(on_message)
-    executor.start_polling(dp, skip_updates=False)
+executor.start_polling(dp, skip_updates=False, on_startup=on_startup)
