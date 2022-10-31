@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
 
 # ide
 .idea
@@ -143,3 +144,5 @@ portfolio/keys
 portfolio/env.py
 
 docker-compose.override.yml
+*.pyc
+*.pyc
