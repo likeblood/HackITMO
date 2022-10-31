@@ -1,5 +1,5 @@
 import sqlite3 as sq
-from bot.create_bot import bot, dp, counter
+from ..create_bot import bot, counter
 
 def sql_start():
     global base, cur

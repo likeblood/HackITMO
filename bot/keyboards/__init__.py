@@ -1,1 +1,1 @@
-from bot.keyboards.admin_keyboard import button_case_admin
+from admin_keyboard import button_case_admin

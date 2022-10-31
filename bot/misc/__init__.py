@@ -1,1 +1,1 @@
-from bot.misc import throttling
+from misc import throttling

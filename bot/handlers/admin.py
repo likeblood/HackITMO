@@ -4,9 +4,9 @@ from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 
-from bot.create_bot import dp, bot
-from bot.keyboards import admin_keyboard
-from bot.data_base import sqlite_db
+from ..create_bot import dp, bot
+from ..keyboards import admin_keyboard
+from ..data_base import sqlite_db
 
 
 ID = None
